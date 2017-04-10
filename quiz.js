@@ -1,34 +1,39 @@
 const appState = { 
 	questions: [
 	{questionText:'What is 1 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 4},
-	{questionText:'What is 2 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 5},
+	{questionText:'What is your favorite color', answerChoice: ['Blue','Black','Green','Yellow','Purple'],correctAnswer: 'Blue'},
 	{questionText:'What is 3 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 6},
 	{questionText:'What is 4 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 7}],
 
 	currentQuestion: null,
+	next: 0,
 	score: 0,
 	correctResponse: 'You are a Math genius!',
-	incorrectResponse: 'Try again!'
+	incorrectResponse: 'You are not a genius!'
 }
 
 
-
-
 //Start button
-let start = function() {
-	currentQuestion = 0;
-	showQuiz = appState.questions[0].questionText;
-	showAnswer1 = appState.questions[0].answerChoice[0];
-	showAnswer2 = appState.questions[0].answerChoice[1];
-	showAnswer3 = appState.questions[0].answerChoice[2];
-	showAnswer4 = appState.questions[0].answerChoice[3];
-	showAnswer5 = appState.questions[0].answerChoice[4];
-	showScore = appState.score;
+let showQuiz = function() {
+	let question = appState.next;
+	let showQuestion = appState.questions[question].questionText;
+	let showAnswers = appState.questions[question].answerChoice;
+		
+	showAnswer1 = showAnswers[0];
+	showAnswer2 = showAnswers[1];
+	showAnswer3 = showAnswers[2];
+	showAnswer4 = showAnswers[3];
+	showAnswer5 = showAnswers[4];
+	
+	let showScore = appState.score;		
+	
+	console.log(showQuestion);
+	console.log(showAnswer1);
+	console.log(showAnswer2);
+	console.log(showAnswer3);
+	console.log(showAnswer4);
+	console.log(showAnswer5);
 };
-
-//<h1> this quiz </h1>
-//<p> what is 1 + 3 </p>
-//<button>submit</button>
 
 //Submit button Function
 let submit = function(usersInput) {
@@ -40,12 +45,11 @@ let submit = function(usersInput) {
   }
   else if (usersInput !== correctAnswer) {
   	console.log(appState.incorrectResponse);
-
+		console.log(`The correct answer is ${correctAnswer}!`);
   }
-
 };
 
-submit(4);
+//submit();
 //1- get user's input
 //2- compare user's input to correctAnswer
 
@@ -58,12 +62,13 @@ submit(4);
 
 //Submit Answer choice function/event
 
-
-
-
-
 //Next button function
-
+let nextQuestion = function() {
+	//change the index of question array
+	//change the next state to increment
+	let number = appState.next++;
+	number++;
+};
 
 
 
