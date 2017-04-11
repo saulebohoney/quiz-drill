@@ -1,3 +1,4 @@
+//1---STATE---THIS IS DATA
 const appState = { 
 	questions: [
 	{questionText:'What is 1 + 3 =', answerChoice: [7,5,4,1,6], correctAnswer: 4},
@@ -11,6 +12,7 @@ const appState = {
 	correctResponse: 'You are correct!',
 	incorrectResponse: `You are incorrect.`
 };
+
 
 let question = appState.currentQuestion;
 
@@ -26,18 +28,26 @@ let showQuiz = function() {
 	}	
 };
 
-
+//2---FUNCTIONs
 //Submit button Function
 let submit = function(usersInput) {
-	let correctAnswer = appState.questions[question].correctAnswer; 
+	let correctAnswer = appState.questions[counter].correctAnswer; 
+console.log(usersInput);
+console.log(correctAnswer);
   if(usersInput === correctAnswer) {
   	appState.score++;
-		return appState.correctResponse;
+		response = appState.correctResponse;
+		console.log(response);
   } else {
-  	return `${appState.incorrectResponse} The correct answer is ${correctAnswer}.`;
+      
+        reponse = `${appState.incorrectResponse} The correct answer is ${correctAnswer}.`;
+        console.log(response);
   }
+    return response;
+
 };
 
+let response = '';
 //Next button function
 let nextQuestion = function() {
 	let number = counter++;
@@ -54,13 +64,32 @@ let reset = function() {
 
 
 
-//EVENT HANDLERS
+//3---EVENT HANDLERS
 $('#quiz-container').on('click', 'button', function() {
 	question = 0;
-	showQuiz();		
-	let radioValue = $('input[type=radio]:checked').val();
-	console.log(radioValue);
+	showQuiz();	
 });
+
+ $('#quiz-container').on('click', 'input[type=radio]', function () {
+	let radioValue = $('input[name="option"]:checked').val();
+	submit(radioValue);
+ 	console.log(radioValue);
+});
+
+//let radioValue = $('input[name="option"]:checked').val();
+
+// $('#quiz-container').on('click', '#submit', function(event) {
+// 	event.preventDefault();
+
+// 	let radioValue = $('input[name="option"]:checked').val();
+// 	// let userValue = radioValue
+	
+// 	submit(radioValue);
+
+
+// });
+
+
 
 $(function() {
 	//renderViews(showMainMenu);
@@ -69,9 +98,9 @@ $(function() {
 //let showQuestion = appState.questions[question].questionText;
 //let showAnswers = appState.questions[question].answerChoice;
 var _ = 'Yolo';
-//RENDER
-console.log(question);
-let counter = 2;
+//4----RENDER
+//console.log(question);
+let counter = 4;
 
 let viewMainMenu = `<h1>Quiz</h1>
 		<p>This is a quiz about stuff. Click on one choice and when you are for real sure it is correct, press the submit button.</p>
@@ -85,7 +114,7 @@ let viewQuiz = `<p id="question-status">This is question ${counter + 1} of ${app
 				<label class="option"><input type="radio" name="option" value="${appState.questions[counter].answerChoice[3]}"><span id="opt4">${appState.questions[counter].answerChoice[3]}</span></label>
 				<label class="option"><input type="radio" name="option" value="${appState.questions[counter].answerChoice[4]}"><span id="opt5">${appState.questions[counter].answerChoice[4]}</span></label>
 			<button id="submit">SUBMIT</button>
-			<p id="result">This is where the response is.</p>`;
+			<p id="result">${response}</p>`;
 let viewResult = `<h3>You answered ${_} of ${_} questions right.</h3>
 				<button id="reset">RESET</button>`;	
 
