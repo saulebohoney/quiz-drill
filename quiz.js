@@ -7,38 +7,25 @@ const appState = {
 	{questionText:'Which race does Gandalf belong to?', answerChoice: ['Human', 'Wizard', 'Elf', 'Maiar', 'Mayan'], correctAnswer: 'Maiar'}	
   ],
 	currentQuestion: null,
-	next: 0,
 	score: 0,
 	correctResponse: 'You are correct!',
 	incorrectResponse: `You are incorrect.`
 };
 
-//Start button
+let question = appState.currentQuestion;
+
 let showQuiz = function() {
-	
-	let question = appState.next;
-	let showQuestion = appState.questions[question].questionText;
-	let showAnswers = appState.questions[question].answerChoice;
-		
-	showAnswer1 = showAnswers[0];
-	showAnswer2 = showAnswers[1];
-	showAnswer3 = showAnswers[2];
-	showAnswer4 = showAnswers[3];
-	showAnswer5 = showAnswers[4];
-	
-	let showScore = appState.score;		
-	
-	console.log(showQuestion);
-	console.log(showAnswer1);
-	console.log(showAnswer2);
-	console.log(showAnswer3);
-	console.log(showAnswer4);
-	console.log(showAnswer5);
+	if(question === null) {
+		renderViews(viewMainMenu);
+	}
+	if(question === 0) {
+		renderViews(viewQuiz);
+	}	
 };
 
 //Submit button Function
 let submit = function(usersInput) {
-	let correctAnswer = appState.questions[appState.next].correctAnswer; 
+	let correctAnswer = appState.questions[question].correctAnswer; 
   if(usersInput === correctAnswer) {
   	appState.score++;
 		return appState.correctResponse;
@@ -49,15 +36,55 @@ let submit = function(usersInput) {
 
 //Next button function
 let nextQuestion = function() {
-	let number = appState.next++;
+	let number = question++;
 	number++;
 };
 
 //Start new quizz button function
 let reset = function() {
-	appState.next = 0;
+	question = 0;
 	appState.score = 0;
-	showQuiz();
+	renderViews(viewQuiz);
 };
+
+
+//let radioValue = $('input[type=radio]:checked').val();
+
+//EVENT HANDLERS
+$('#quiz-container').on('click', 'button', function() {
+	question = 0;
+	showQuiz();		
+	//console.log(radioValue);
+});
+$(function() {
+	//renderViews(showMainMenu);
+	showQuiz();
+});
+//let showQuestion = appState.questions[question].questionText;
+//let showAnswers = appState.questions[question].answerChoice;
+var _ = 0;
+//RENDER
+let viewMainMenu = `<h1>Quiz</h1>
+		<p>This is a quiz about stuff. Click on one choice and when you are for real sure it is correct, press the submit button.</p>
+		<button id="start">Start Quiz</button>`;
+let viewQuiz = `<p id="question-status">This is question ${_} of ${_}</p>
+		<p id="score">Score: ${_}</p>
+			<h3 id="view-question">${_}</h3>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt1">${_}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt2">${_}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt3">${_}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt4">${_}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt5">${_}</span></label>
+			<button id="submit">SUBMIT</button>
+			<p id="result">This is where the response is.</p>`;
+let viewResult = `<h3>You answered ${_} of ${_} questions right.</h3>
+				<button id="reset">RESET</button>`;	
+
+let renderViews = function(view) {
+	$('#quiz-container').html(view);
+};
+
+
+
 
 
