@@ -1,20 +1,21 @@
 const appState = { 
 	questions: [
-	{questionText:'What is 1 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 4},
-	{questionText:'What is your favorite color', answerChoice: ['Blue','Black','Green','Yellow','Purple'],correctAnswer: 'Blue'},
-	{questionText:'What is 3 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 6},
-	{questionText:'What is 4 + 3', answerChoice: [7,5,4,1,6],correctAnswer: 7}],
-
+	{questionText:'What is 1 + 3 =', answerChoice: [7,5,4,1,6], correctAnswer: 4},
+	{questionText:'What is your favorite color?', answerChoice: ['Blue','Black','Green','Yellow','Purple'],correctAnswer: 'Blue'},
+	{questionText:`Which college won the men's 2017 NCAA Championship?`, answerChoice: ['Gonzaga', 'North Carolina', 'South Carolina', 'Oregon', 'Florida'], correctAnswer: 'North Carolina'},
+	{questionText:`Which college won the women's 2017 NCAA Championship?`, answerChoice: ['Gonzaga', 'North Carolina', 'South Carolina', 'Oregon', 'Florida'], correctAnswer: 'South Carolina'},
+	{questionText:'Which race does Gandalf belong to?', answerChoice: ['Human', 'Wizard', 'Elf', 'Maiar', 'Mayan'], correctAnswer: 'Maiar'}	
+  ],
 	currentQuestion: null,
 	next: 0,
 	score: 0,
-	correctResponse: 'You are a Math genius!',
-	incorrectResponse: 'You are not a genius!'
-}
-
+	correctResponse: 'You are correct!',
+	incorrectResponse: `You are incorrect.`
+};
 
 //Start button
 let showQuiz = function() {
+	
 	let question = appState.next;
 	let showQuestion = appState.questions[question].questionText;
 	let showAnswers = appState.questions[question].answerChoice;
@@ -37,56 +38,26 @@ let showQuiz = function() {
 
 //Submit button Function
 let submit = function(usersInput) {
-	var correctAnswer = appState.questions[0].correctAnswer; //4
+	let correctAnswer = appState.questions[appState.next].correctAnswer; 
   if(usersInput === correctAnswer) {
-  	console.log(appState.correctResponse);
-  let showScore = appState.score++;
-  currentQuestion = appState.questions[1].questionText;
-  }
-  else if (usersInput !== correctAnswer) {
-  	console.log(appState.incorrectResponse);
-		console.log(`The correct answer is ${correctAnswer}!`);
+  	appState.score++;
+		return appState.correctResponse;
+  } else {
+  	return `${appState.incorrectResponse} The correct answer is ${correctAnswer}.`;
   }
 };
 
-//submit();
-//1- get user's input
-//2- compare user's input to correctAnswer
-
-//3-if correct then show You are math genius
-//4-else try again 
-
-//5-increment score
-//6- and go to the next question
-
-
-//Submit Answer choice function/event
-
 //Next button function
 let nextQuestion = function() {
-	//change the index of question array
-	//change the next state to increment
 	let number = appState.next++;
 	number++;
 };
 
-
-
-
-//Validate questions function- correct/incorrect/score incrementer(if/else)
-
-
-
-
-
-
 //Start new quizz button function
+let reset = function() {
+	appState.next = 0;
+	appState.score = 0;
+	showQuiz();
+};
 
 
-
-
-
-
-
-
-//Shouw result score string
