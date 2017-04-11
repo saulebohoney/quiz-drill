@@ -6,7 +6,7 @@ const appState = {
 	{questionText:`Which college won the women's 2017 NCAA Championship?`, answerChoice: ['Gonzaga', 'North Carolina', 'South Carolina', 'Oregon', 'Florida'], correctAnswer: 'South Carolina'},
 	{questionText:'Which race does Gandalf belong to?', answerChoice: ['Human', 'Wizard', 'Elf', 'Maiar', 'Mayan'], correctAnswer: 'Maiar'}	
   ],
-	currentQuestion: null,
+	currentQuestion: 0,
 	score: 0,
 	correctResponse: 'You are correct!',
 	incorrectResponse: `You are incorrect.`
@@ -18,10 +18,14 @@ let showQuiz = function() {
 	if(question === null) {
 		renderViews(viewMainMenu);
 	}
-	if(question === 0) {
+	if(question >= 0 && question < appState.questions.length) {
 		renderViews(viewQuiz);
+    }
+	if(question >= appState.questions.length) {
+	    renderViews(viewResult);
 	}	
 };
+
 
 //Submit button Function
 let submit = function(usersInput) {
@@ -79,6 +83,7 @@ let viewQuiz = `<p id="question-status">This is question ${_} of ${_}</p>
 			<p id="result">This is where the response is.</p>`;
 let viewResult = `<h3>You answered ${_} of ${_} questions right.</h3>
 				<button id="reset">RESET</button>`;	
+
 
 let renderViews = function(view) {
 	$('#quiz-container').html(view);
