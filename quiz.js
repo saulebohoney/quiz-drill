@@ -1,7 +1,7 @@
 //1---STATE---THIS IS DATA
 const appState = { 
 	questions: [
-	{questionText:'What is 1 + 3 =', answerChoice: [7,5,4,1,6], correctAnswer: 4},
+	{questionText:'What is 1 + 3 =', answerChoice: [7,5,4,1,6], correctAnswer: '4'},
 	{questionText:'What is your favorite color?', answerChoice: ['Blue','Black','Green','Yellow','Purple'],correctAnswer: 'Blue'},
 	{questionText:`Which college won the men's 2017 NCAA Championship?`, answerChoice: ['Gonzaga', 'North Carolina', 'South Carolina', 'Oregon', 'Florida'], correctAnswer: 'North Carolina'},
 	{questionText:`Which college won the women's 2017 NCAA Championship?`, answerChoice: ['Gonzaga', 'North Carolina', 'South Carolina', 'Oregon', 'Florida'], correctAnswer: 'South Carolina'},
@@ -32,19 +32,17 @@ let showQuiz = function() {
 //Submit button Function
 let submit = function(usersInput) {
 	let correctAnswer = appState.questions[counter].correctAnswer; 
-console.log(usersInput);
-console.log(correctAnswer);
+	console.log(usersInput);
+	console.log(correctAnswer);
   if(usersInput === correctAnswer) {
   	appState.score++;
 		response = appState.correctResponse;
 		console.log(response);
   } else {
-      
-        reponse = `${appState.incorrectResponse} The correct answer is ${correctAnswer}.`;
-        console.log(response);
+		response = `${appState.incorrectResponse} The correct answer is ${correctAnswer}.`;
+		console.log(response);
   }
     return response;
-
 };
 
 let response = '';
@@ -70,24 +68,18 @@ $('#quiz-container').on('click', 'button', function() {
 	showQuiz();	
 });
 
- $('#quiz-container').on('click', 'input[type=radio]', function () {
-	let radioValue = $('input[name="option"]:checked').val();
-	submit(radioValue);
- 	console.log(radioValue);
+let radioValue;
+
+ $('#quiz-container').on('click', 'input[name="option"]', function () {
+	 radioValue = $('input[name="option"]:checked').val();	 
 });
 
-//let radioValue = $('input[name="option"]:checked').val();
-
-// $('#quiz-container').on('click', '#submit', function(event) {
-// 	event.preventDefault();
-
-// 	let radioValue = $('input[name="option"]:checked').val();
-// 	// let userValue = radioValue
-	
-// 	submit(radioValue);
-
-
-// });
+ $('#quiz-container').on('click', '#submit', function(event) {
+	 submit(radioValue);
+	 $('#result').text(response);
+	 $('#submit').text('Next');
+	 
+});
 
 
 
@@ -100,7 +92,7 @@ $(function() {
 var _ = 'Yolo';
 //4----RENDER
 //console.log(question);
-let counter = 4;
+let counter = 0;
 
 let viewMainMenu = `<h1>Quiz</h1>
 		<p>This is a quiz about stuff. Click on one choice and when you are for real sure it is correct, press the submit button.</p>
@@ -114,7 +106,7 @@ let viewQuiz = `<p id="question-status">This is question ${counter + 1} of ${app
 				<label class="option"><input type="radio" name="option" value="${appState.questions[counter].answerChoice[3]}"><span id="opt4">${appState.questions[counter].answerChoice[3]}</span></label>
 				<label class="option"><input type="radio" name="option" value="${appState.questions[counter].answerChoice[4]}"><span id="opt5">${appState.questions[counter].answerChoice[4]}</span></label>
 			<button id="submit">SUBMIT</button>
-			<p id="result">${response}</p>`;
+			<p id="result"></p>`;
 let viewResult = `<h3>You answered ${_} of ${_} questions right.</h3>
 				<button id="reset">RESET</button>`;	
 
