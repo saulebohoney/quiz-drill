@@ -68,19 +68,19 @@ $(function() {
 var _ = 'Yolo';
 //RENDER
 console.log(question);
-let counter = 0;
+let counter = 2;
 
 let viewMainMenu = `<h1>Quiz</h1>
 		<p>This is a quiz about stuff. Click on one choice and when you are for real sure it is correct, press the submit button.</p>
 		<button id="start">Start Quiz</button>`;
-let viewQuiz = `<p id="question-status">This is question ${_} of ${_}</p>
-		<p id="score">Score: ${_}</p>
+let viewQuiz = `<p id="question-status">This is question ${counter + 1} of ${appState.questions.length}</p>
+		<p id="score">Score: ${appState.score}</p>
 			<h3 id="view-question">${appState.questions[counter].questionText}</h3>
-				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt1">${_}</span></label>
-				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt2">${_}</span></label>
-				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt3">${_}</span></label>
-				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt4">${_}</span></label>
-				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt5">${_}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt1">${appState.questions[counter].answerChoice[0]}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt2">${appState.questions[counter].answerChoice[1]}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt3">${appState.questions[counter].answerChoice[2]}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt4">${appState.questions[counter].answerChoice[3]}</span></label>
+				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt5">${appState.questions[counter].answerChoice[4]}</span></label>
 			<button id="submit">SUBMIT</button>
 			<p id="result">This is where the response is.</p>`;
 let viewResult = `<h3>You answered ${_} of ${_} questions right.</h3>
