@@ -6,7 +6,7 @@ const appState = {
 	{questionText:`Which college won the women's 2017 NCAA Championship?`, answerChoice: ['Gonzaga', 'North Carolina', 'South Carolina', 'Oregon', 'Florida'], correctAnswer: 'South Carolina'},
 	{questionText:'Which race does Gandalf belong to?', answerChoice: ['Human', 'Wizard', 'Elf', 'Maiar', 'Mayan'], correctAnswer: 'Maiar'}	
   ],
-	currentQuestion: 0,
+	currentQuestion: null,
 	score: 0,
 	correctResponse: 'You are correct!',
 	incorrectResponse: `You are incorrect.`
@@ -18,9 +18,9 @@ let showQuiz = function() {
 	if(question === null) {
 		renderViews(viewMainMenu);
 	}
-	if(question >= 0 && question < appState.questions.length) {
+	if(typeof question === 'number') {
 		renderViews(viewQuiz);
-    }
+  }
 	if(question >= appState.questions.length) {
 	    renderViews(viewResult);
 	}	
@@ -40,7 +40,7 @@ let submit = function(usersInput) {
 
 //Next button function
 let nextQuestion = function() {
-	let number = question++;
+	let number = counter++;
 	number++;
 };
 
@@ -58,7 +58,6 @@ let reset = function() {
 $('#quiz-container').on('click', 'button', function() {
 	question = 0;
 	showQuiz();		
-	//console.log(radioValue);
 });
 $(function() {
 	//renderViews(showMainMenu);
@@ -68,12 +67,15 @@ $(function() {
 //let showAnswers = appState.questions[question].answerChoice;
 var _ = 'Yolo';
 //RENDER
+console.log(question);
+let counter = 0;
+
 let viewMainMenu = `<h1>Quiz</h1>
 		<p>This is a quiz about stuff. Click on one choice and when you are for real sure it is correct, press the submit button.</p>
 		<button id="start">Start Quiz</button>`;
 let viewQuiz = `<p id="question-status">This is question ${_} of ${_}</p>
 		<p id="score">Score: ${_}</p>
-			<h3 id="view-question">${_}</h3>
+			<h3 id="view-question">${appState.questions[counter].questionText}</h3>
 				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt1">${_}</span></label>
 				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt2">${_}</span></label>
 				<label class="option"><input type="radio" name="option" value="${_}"><span id="opt3">${_}</span></label>
