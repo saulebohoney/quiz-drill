@@ -40,7 +40,7 @@ let nextQuestion = function() {
 	number++;
 };
 
-//Start new quizz button function
+//Start new quiz button function
 let reset = function() {
 	question = 0;
 	appState.score = 0;
@@ -62,7 +62,7 @@ $(function() {
 });
 //let showQuestion = appState.questions[question].questionText;
 //let showAnswers = appState.questions[question].answerChoice;
-var _ = 0;
+var _ = 'Yolo';
 //RENDER
 let viewMainMenu = `<h1>Quiz</h1>
 		<p>This is a quiz about stuff. Click on one choice and when you are for real sure it is correct, press the submit button.</p>
