@@ -78,8 +78,16 @@ let radioValue;
 	 submit(radioValue);
 	 $('#result').text(response);
 	 $('#submit').text('Next');
-	 
+	 $('#score').text(`Score: ${appState.score}`);
+	 //want to run the nextfunction
+	 nextQuestion();
+	 //run showQuiz
+	 showQuiz();
 });
+
+
+
+
 
 
 
